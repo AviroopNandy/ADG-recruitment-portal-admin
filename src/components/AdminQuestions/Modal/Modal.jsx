@@ -13,7 +13,7 @@ const Modal = (props) => {
     if((props.questionDescription && props.correctOption && Object.keys(props.options).length===4) || props.selected === 'management'){
     props.onHide();
     props.addQuestion();
-    // alert("Question submitted successfully!");
+    alert("Question submitted successfully!");
   } else {
     alert("Make sure there is a question description,4 options,a correct option input for submission")
   }
