@@ -75,9 +75,9 @@ const MgmtQuestions = (props)=>{
                     <div className={classes.questions} key={index}>
                         <div className={classes.descrip}>
                             <div>{index+1}.</div>
-                            <div>{question.questionDescription}</div>
-                            {/* <div className={Object.keys(question.file).includes('base64') ? "display-image" :"display-none"}><br />
-                                <img src={question.file.base64} alt="Q.img" className={classes.image}></img>
+                            <div className={classes.questionDescrip1}>{question.questionDescription}</div>
+                            {/* <div className={question.file ? "display-image" :"display-none"}><br />
+                                <img src={question.file} alt="Q.img" className={classes.image}></img>
                             </div> */}
                         </div>
                         <button onClick={()=>deleteMgmtQuestion(question.id)}>Delete</button>

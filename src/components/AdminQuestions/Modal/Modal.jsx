@@ -10,23 +10,24 @@ const Modal = (props) => {
     props.addOption(props.inputOptionVal,props.id);
   }
   function handleClick(){
-    if(props.correctOption || props.selected === 'management'){
+    if((props.questionDescription && props.correctOption && Object.keys(props.options).length===4) || props.selected === 'management'){
     props.onHide();
     props.addQuestion();
-    alert("Question submitted successfully!");
+    // alert("Question submitted successfully!");
   } else {
-    alert("Enter the correct option value to submit")
+    alert("Make sure there is a question description,4 options,a correct option input for submission")
   }
 }
+
   let modalRef=useRef()
   useEffect(()=>{
     document.addEventListener("mousedown",(event)=>{
       if(!modalRef.current.contains(event.target)){
         props.onHide();
+        // props.onClear();
       }
     });
   });
-  let emptyFunction = ()=>{ return }
   const modalClass = props.show ? "modal display-block" : "modal display-none";
   const showOptionsClass=props.selected==='management' ? "hide-options" : "display-options";
   return (
@@ -35,9 +36,9 @@ const Modal = (props) => {
         <div className="modal-header">
           <h4 className="heading">Add Question</h4>
         </div>
-        <div className="input-field" onChange={props.setQuestionDescription}>
+        <div className="input-field">
           <label htmlFor="stmt" className="label">Statement:</label>
-          <textarea id="stmt" value={props.questionDescription} onChange={emptyFunction}/>
+          <textarea id="stmt" value={props.questionDescription} onChange={props.setQuestionDescription} />
         </div>
         {/* <div className="type">
           <div>Type:</div>
@@ -67,7 +68,7 @@ const Modal = (props) => {
             <div>
             <button onClick={handleAddOptions} className="btn-addopt">+ Add</button>
             <input placeholder="Add Option" value={props.optionText} onChange={props.inputOption} className="input-option"></input>
-            <input placeholder="Enter the index of the correct option" value={props.correctOption} className="input-correct" onChange={props.getCorrectOption}/>
+            <input placeholder="Enter index of the correct option" value={props.correctOption} className="input-correct" onChange={props.getCorrectOption}/>
             </div>
         </div>
         <button onClick={handleClick} className="submit-btn">Post Question</button>

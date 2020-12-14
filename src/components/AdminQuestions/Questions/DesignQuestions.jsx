@@ -90,12 +90,7 @@ const DesignQuestions = (props)=>{
             })
 
             // console.log("Design: ",designQuestions);
-            setCorrectOption("");
-            setQuestionDescription("");
-            setOptions({});
-            setFiles({});
-            index=0;
-            optionNo=0;
+            clearAll();
         }
         function deleteDesignQuestion(id){
             setDesignQuestions((prevQ)=>{
@@ -104,7 +99,14 @@ const DesignQuestions = (props)=>{
                 })
             })
         }
-
+        function clearAll(){
+            setCorrectOption("");
+            setQuestionDescription("");
+            setOptions({});
+            setFiles({});
+            index=0;
+            optionNo=0;
+        }
 
     const [showModal,setShowModal]=useState(false);
     let showModal1 = ()=>{ setShowModal(true) }
@@ -123,7 +125,7 @@ const DesignQuestions = (props)=>{
             setQuestionDescription={inputValue} inputYear={yearValue} questionDescription={questionDescription} optionText={inputOption}
             addQuestion={addDesignQuestion} id={questionid} 
             addOption={addOption} inputOption={optionValue} inputOptionVal={inputOption} options={options} correctOption={correctOption} getCorrectOption={getCorrectOption}
-            getFile={getFile}
+            getFile={getFile} onClear={clearAll}
             />
                 {designQuestions.map((question,index)=>(
                     <div className={classes.questions} key={index}>

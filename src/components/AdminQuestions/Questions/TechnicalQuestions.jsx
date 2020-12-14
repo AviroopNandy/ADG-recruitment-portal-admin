@@ -63,9 +63,7 @@ const TechQuestions = (props)=>{
             setTechQuestions((prevQ)=>{
                 return [...prevQ,{id:questionid,questionDescription:questionDescription,yearofstudy:yearofstudy,options:options,file:files.base64,correctOption:correctOption}]
             })
-
-            console.log(techQuestions);
-
+            // console.log(techQuestions);
             const questionObject = {questionDescription:questionDescription, options:options, correctOption:correctOption, yearofstudy:yearofstudy, questionImage:files.base64};
             
             await fetch("https://adgrecruitments.herokuapp.com/admin/technical/add-question", {
@@ -90,14 +88,8 @@ const TechQuestions = (props)=>{
                 // console.log(error);
                 alert("Error: ", error);
             })
-
             // console.log(techQuestions);
-            setCorrectOption("");
-            setQuestionDescription("");
-            setOptions({});
-            setFiles({});
-            index=0;
-            optionNo=0;
+            clearAll();
         }
         function deleteTechQuestion(id){
             setTechQuestions((prevQ)=>{
@@ -106,7 +98,14 @@ const TechQuestions = (props)=>{
                 })
             })
         }
-
+        function clearAll(){
+            setCorrectOption("");
+            setQuestionDescription("");
+            setOptions({});
+            setFiles({});
+            index=0;
+            optionNo=0;
+        }
 
    const [showModal,setShowModal]=useState(false);
     let showModal1 = ()=>{ setShowModal(true) }
@@ -126,7 +125,7 @@ const TechQuestions = (props)=>{
             addQuestion={addTechQuestion} id={questionid} 
             addOption={addOption} inputOption={optionValue} inputOptionVal={inputOption} options={options} 
             correctOption={correctOption} getCorrectOption={getCorrectOption}
-            getFile={getFile}
+            getFile={getFile} onClear={clearAll}
             />
                 {techQuestions.map((question,index)=>(
                     <div className={classes.questions} key={index}>
