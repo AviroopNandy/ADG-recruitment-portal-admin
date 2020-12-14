@@ -91,14 +91,29 @@ const TechQuestions = (props)=>{
             // console.log(techQuestions);
             clearAll();
         }
-        function deleteTechQuestion(id){
+        async function deleteTechQuestion(id){
             setTechQuestions((prevQ)=>{
                 return prevQ.filter((question,index)=>{
                     return question.id !==id;
                 })
             })
+
+            await fetch("https://adgrecruitments.herokuapp.com/admin/technical/delete-question/" + id, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                }
+            })
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                // console.log(data);
+            })
+            .catch(error => console.log(error))
         }
-        function clearAll(){
+
+        let clearAll = () => {
             setCorrectOption("");
             setQuestionDescription("");
             setOptions({});
@@ -108,8 +123,8 @@ const TechQuestions = (props)=>{
         }
 
    const [showModal,setShowModal]=useState(false);
-    let showModal1 = ()=>{ setShowModal(true) }
-    let hideModal = ()=>{ setShowModal(false) }
+    let showModal1 = () => { setShowModal(true) }
+    let hideModal = () => { setShowModal(false) }
 
     let multipleFunctions = () =>{ showModal1(); generateId(); }
 
