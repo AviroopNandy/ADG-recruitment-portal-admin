@@ -24,6 +24,7 @@ const TechQuestions = (props)=>{
     const optionsArray = ["a", "b", "c", "d"];
 
     function addOption(questionDescription){
+        // index=0;
         if(questionDescription!==""){
             optionNo++;
             if(optionNo<=4){
