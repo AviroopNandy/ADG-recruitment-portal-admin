@@ -50,16 +50,30 @@ const MgmtQuestions = (props)=>{
         setFiles({});
         setQuestionDescription("");
     }
-    function deleteMgmtQuestion(id){
+    async function deleteMgmtQuestion(id){
         setMgmtQuestions((prevQ)=>{
             return prevQ.filter((question,index)=>{
                 return question.id !==id;
             })
         })
+
+        await fetch("https://adgrecruitments.herokuapp.com/admin/management/delete-question/" + id, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        })
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            // console.log(data);
+        })
+        .catch(error => console.log(error))
     }
     const [showModal,setShowModal]=useState(false);
-    let showModal1 = ()=>{ setShowModal(true) }
-    let hideModal = ()=>{ setShowModal(false) }
+    let showModal1 = () => { setShowModal(true) }
+    let hideModal = () => { setShowModal(false) }
     
     let showQuestions=props.selectedValue==="management" ? "management": "display-none";
     return(
